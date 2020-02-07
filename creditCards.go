@@ -16,26 +16,31 @@ type creditCard struct {
 
 func main() {
 
-	j_sonString := `{
+	jSonString := `{
 		"pan" : "5375414112236376",
 		"valid_thru" : "31/23",
 		"owner" : "Rymar Sergey",
 		"cvc_2" : "123"
 	}`
 	cardParse := creditCard{}
-	owner := json.Unmarshal([]byte(j_sonString), &cardParse)
+	owner := json.Unmarshal([]byte(jSonString), &cardParse)
 	if owner != nil {
 	}
 	fmt.Println(IsCreditCardValid(cardParse.Pan))
 
 }
 
-func IsCreditCardValid(s string) bool {
-	s = strings.ReplaceAll(s, " ", "")
-	s = strings.ReplaceAll(s, "-", "")
+func IsCreditCardValid(cardPan string) bool {
+	cardPan = strings.ReplaceAll(cardPan, " ", "")
+	cardPan = strings.ReplaceAll(cardPan, "-", "")
+
+	if len(cardPan) < 13 && len(cardPan) > 19 {
+		return false
+	}
 	var sum int64 = 0
-	for i, j := len(s)-1, 1; i >= 0; i-- {
-		temp, r := strconv.ParseInt(string(s[i]), 10, 8)
+
+	for i, j := len(cardPan)-1, 1; i >= 0; i-- {
+		temp, r := strconv.ParseInt(string(cardPan[i]), 10, 8)
 		if r != nil {
 			sum = 0
 			break

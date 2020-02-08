@@ -39,7 +39,7 @@ func IsCreditCardValid(cardPan string) bool {
 	}
 	var sum int64 = 0
 
-	for i, j := len(cardPan)-1, 1; i >= 0; i-- {
+	for i, j := len(cardPan)-1, 1; i >= 0; i, j = i-1, j+1 {
 		temp, r := strconv.ParseInt(string(cardPan[i]), 10, 8)
 		if r != nil {
 			sum = 0
@@ -51,7 +51,6 @@ func IsCreditCardValid(cardPan string) bool {
 				temp -= 9
 			}
 		}
-		j++
 		sum += temp
 	}
 	return (sum != 0) && (sum%10 == 0)

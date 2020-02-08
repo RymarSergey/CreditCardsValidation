@@ -17,7 +17,7 @@ type creditCard struct {
 func main() {
 
 	jSonString := `{
-		"pan" : "5375414112236376",
+		"pan" : "5347578414112236376",
 		"valid_thru" : "31/23",
 		"owner" : "Rymar Sergey",
 		"cvc_2" : "123"
